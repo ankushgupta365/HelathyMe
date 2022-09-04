@@ -14,6 +14,7 @@ const Demo = () => {
   const [dishName, setDishName] = useState(null)
   const [img,setImg] = useState(null)
 
+
   const handleChange = (e) => {
     console.log(e.target.files)
     setImage(e.target.files[0])
@@ -43,6 +44,24 @@ const Demo = () => {
     });
   }
 
+  const getNutriInfo=()=>{
+    const idimg = {'imageId': imageId}
+    const options = {
+      method: 'POST',
+      url: 'https://api.logmeal.es/v2/nutrition/recipe/nutritionalInfo',
+      headers: {
+        'Authorization': 'Bearer 87e9cf703d15e4f1e72c1de2df4aeabaca36c56f',
+      },
+      data: idimg
+    };
+    axios.request(options).then(function (response) {
+      console.log(response.data);
+      // setImageId(response.data.imageId)
+      // setDishName(response.data.recognition_results[0].name)
+    }).catch(function (error) {
+      console.error(error);
+    });
+  }
   return (
     <section className='container'>
       <div className='child parent-child'>
@@ -61,6 +80,7 @@ const Demo = () => {
         {/* <p>{imageId}</p> */}
         <img src={img} widht="120" height="180"/>
         <p>{dishName}</p>
+        <button onClick={getNutriInfo} >Get Nutri info</button>
       </div>}
     </section>
   )
