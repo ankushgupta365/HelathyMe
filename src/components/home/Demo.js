@@ -10,29 +10,20 @@ const onSearch = (value) => console.log(value);
 
 const Demo = () => {
   const [image, setImage] = useState('')
+  const [imageId, setImageId] = useState(null)
+  const [dishName, setDishName] = useState(null)
+  const [img,setImg] = useState(null)
 
   const handleChange = (e) => {
     console.log(e.target.files)
     setImage(e.target.files[0])
+    setImg(URL.createObjectURL(e.target.files[0]))
   }
 
   const handleApi = () => {
 
-    // //call the api
-    // const url = 'api.logmeal.es/v2/recognition/dish';
-    // const headers = {Authorization: "Bearer 87e9cf703d15e4f1e72c1de2df4aeabaca36c56f"}
-
     const formData = new FormData()
     formData.append('image', image)
-
-    // axios.post(url, headers,formData).then(result => {
-    //   console.log(result.data)
-    //   alert('success')
-    // })
-    //   .catch(error => {
-    //     alert('service error')
-    //     console.log(error)
-    //   })
 
 
     const options = {
@@ -43,9 +34,10 @@ const Demo = () => {
       },
       data: formData
     };
-
     axios.request(options).then(function (response) {
       console.log(response.data);
+      setImageId(response.data.imageId)
+      setDishName(response.data.recognition_results[0].name)
     }).catch(function (error) {
       console.error(error);
     });
@@ -65,6 +57,11 @@ const Demo = () => {
       <div className='child'>
         <img src={doctor} alt="athlete" width="550" height="750"></img>
       </div>
+      {imageId && dishName && img && <div>
+        {/* <p>{imageId}</p> */}
+        <img src={img} widht="120" height="180"/>
+        <p>{dishName}</p>
+      </div>}
     </section>
   )
 }
