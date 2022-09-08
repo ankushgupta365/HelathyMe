@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import axios from "axios"
 import doctor from './doctor.png'
-import { Button, Modal } from 'antd';
+import { Button, Tag } from 'antd';
 // import { FileImageOutlined } from '@ant-design/icons';
 // import { Input, Space } from 'antd';
 // const { Search } = Input;
-
+import './demo.css'
 
 const onSearch = (value) => console.log(value);
 
@@ -33,7 +33,7 @@ const Demo = () => {
       method: 'POST',
       url: 'https://api.logmeal.es/v2/recognition/dish',
       headers: {
-        'Authorization': 'Bearer 8d46848d01dd3ea3a29bc4a59f5b3008c3f83e0d',
+        'Authorization': 'Bearer ac13786cc4e4543eb3ceb1cfc4d644632689eccb',
       },
       data: formData
     };
@@ -52,7 +52,7 @@ const Demo = () => {
       method: 'POST',
       url: 'https://api.logmeal.es/v2/nutrition/recipe/nutritionalInfo',
       headers: {
-        'Authorization': 'Bearer 8d46848d01dd3ea3a29bc4a59f5b3008c3f83e0d',
+        'Authorization': 'Bearer ac13786cc4e4543eb3ceb1cfc4d644632689eccb',
       },
       data: idimg
     };
@@ -87,7 +87,7 @@ const Demo = () => {
   return (
     <>
       <section className='container'>
-        <div className='child parent-child'>
+        <div className='parent-child'>
           <h2>
             One step solution to all your dietary needs
           </h2>
@@ -97,19 +97,19 @@ const Demo = () => {
           </div>
           {imageId && dishName && img && <div style={{ marginTop: '20px' }}>
             <img src={img} widht="120" height="180" />
-            <p>{dishName}</p>
+           <p style={{fontSize: '18px'}}>{dishName}</p> 
             <button onClick={getNutriInfo} >Get Nutri info</button>
           </div>}
         </div>
         {nutriData &&
           <div className='child'>
-            <p>calories: {nutriData.nutritional_info.calories}</p>
-            <p>carbs: {nutriData.nutritional_info.dailyIntakeReference['CHOCDF'].level}</p>
-            <p>Saturated fats: {nutriData.nutritional_info.dailyIntakeReference['FASAT'].level}</p>
-            <p>protein: {nutriData.nutritional_info.dailyIntakeReference['PROCNT'].level}</p>
-            <p>sugar: {nutriData.nutritional_info.dailyIntakeReference['SUGAR'].level}</p>
+            <div className="chip">calories: {nutriData.nutritional_info.calories}</div>
+            <div className="chip">carbs: {nutriData.nutritional_info.dailyIntakeReference['CHOCDF'].level}</div>
+            <div className="chip">Saturated fats: {nutriData.nutritional_info.dailyIntakeReference['FASAT'].level}</div>
+            <div className="chip">protein: {nutriData.nutritional_info.dailyIntakeReference['PROCNT'].level}</div>
+            <div className="chip">sugar: {nutriData.nutritional_info.dailyIntakeReference['SUGAR'].level}</div>
           </div>}
-        <div className='child'>
+        <div >
           <img src={doctor} alt="athlete" width="550" height="750"></img>
         </div>
       </section>

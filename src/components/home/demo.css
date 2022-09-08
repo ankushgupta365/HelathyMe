@@ -1,0 +1,25 @@
+
+    .chip{
+        display: inline-flex;
+        flex-direction: row;
+        background-color: #65a8fb;
+        border: none;
+        cursor: default;
+        height: 36px;
+        outline: none;
+        padding: 16px;
+        font-size: 16px;
+        font-family:"Open Sans", sans-serif;
+        white-space: nowrap;
+        align-items: center;
+        border-radius: 16px;
+        vertical-align: middle;
+        text-decoration: none;
+        justify-content: center;
+        margin: 10px;
+    }
+
+    .child{
+        display: flex;
+        flex-direction: column;
+    }
